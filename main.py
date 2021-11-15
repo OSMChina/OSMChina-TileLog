@@ -4,11 +4,12 @@ from pprint import pprint
 apache_log_parser_line = apache_log_parser.make_parser("%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\"")
 
 # data = open("access.log20211011", "r").readlines()
-data = open("access.log", "r").readlines()
+data_file = open("access.log", "r").readlines()
 
-# for i in range(len(data)):
-for i in range(4):
-    data_token = apache_log_parser_line(data[i])
+data_list=[]
+
+for i in range(len(data_file)):
+    data_token = apache_log_parser_line(data_file[i])
     # pprint(data_token)
     data_dict = {}
     data_dict["basic-ip"] = data_token["remote_host"]
@@ -25,4 +26,15 @@ for i in range(4):
         "request_header_user_agent__browser__version_string"]
     data_dict["ua-os"] = data_token["request_header_user_agent__os__family"] + "/" + data_token[
         "request_header_user_agent__os__version_string"]
-    pprint(data_dict)
+    # pprint(data_dict)
+    data_list.append(data_dict)
+
+pprint(data_list)
+
+# 接下来可以做的，对IP，UA进行统计，并且聚类，看看高频在哪里？
+# 同时可以分析一下谁下行流量最大，谁200率最低，进行地区优化
+
+# 此外，因为是OSM数据，所以如果是访问瓦片，可以把IP、UA、请求瓦片的三元组，打一个大大的三元组
+# 对他统计，看由IP+UA唯一标识的一个用户的访问轨迹，判断该用户的兴趣区域
+
+# 不准让欧盟人看见，否则GDPR警告。不过这些数据在国内是合法的
