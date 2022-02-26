@@ -1,7 +1,9 @@
 # OSMChina-TileLog
 TileLog Analysor for OSMC
 
----
+## 解析
+
+（后期应分离Apache后端和其他后端，如官方后端）
 
 首先，进行技术选型
 
@@ -38,3 +40,7 @@ http://www.cocoachina.com/articles/64330
 
 有一个用alp的
 https://blog.csdn.net/weixin_45427650/article/details/105368149
+
+## 数据处理
+
+https://github.com/openstreetmap/tilelog/blob/main/tilelog/__init__.py
